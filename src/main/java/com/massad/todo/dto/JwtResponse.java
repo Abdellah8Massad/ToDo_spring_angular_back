@@ -1,6 +1,11 @@
 package com.massad.todo.dto;
 
-public class JwtResponse {
+import java.io.Serializable;
+
+import org.springframework.data.redis.core.RedisHash;
+
+@RedisHash("JwtResponse")
+public class JwtResponse implements Serializable {
 
     private String token;
     private String nom;
@@ -14,6 +19,10 @@ public class JwtResponse {
         this.prenom = userDetail.getPrenom();
         this.username = userDetail.getUsername();
         this.id = userDetail.getId();
+    }
+    
+    public JwtResponse() {
+    	
     }
 
     public String getToken() {

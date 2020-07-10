@@ -46,7 +46,7 @@ public class JwtController {
         UserDetail userDetail = jwtService.loadUserByUsername(jwtRequest.getUsername());
         LOGGER.info("user details");
         final String token = jwtTokenUtil.generateToken(userDetail);
-        //jwtService.addSessionJWT(new JwtResponse(token,userDetail));
+        jwtService.addSessionJWT(new JwtResponse(token,userDetail));
         return ResponseEntity.ok(new JwtResponse(token,userDetail));
     }
 
@@ -57,20 +57,21 @@ public class JwtController {
         token = bearer[1];
         return ResponseEntity.ok(jwtTokenUtil.getUsernameFromToken(token));
     }
-/*
+
     @GetMapping(path = "/redis/{username}", consumes = "application/json", produces = "application/json")
-    public JwtResponse getRedisUser(@PathVariable String username){
-        if(username != null)
-            return jwtService.getSessionJWT(username);
-        else
+    public ResponseEntity<?> getRedisUser(@PathVariable String username){
+        if(username != null) {
+        	LOGGER.info(" --------------- Username : {} --------------- jwtService {} ", username,jwtService.getSessionJWT(username));
+            return ResponseEntity.ok(jwtService.getSessionJWT(username));        	
+        }else
             return null;
     }
 
     @GetMapping(path = "/redisall", consumes = "application/json", produces = "application/json")
-    public List<JwtResponse> getRedisALLUser(){
-            return jwtService.getALLsessions();
+    public ResponseEntity<?> getRedisALLUser(){
+            return ResponseEntity.ok(jwtService.getALLsessions());
     }
-*/
+
     //releve les exception lies a l'utilisateur (expire,badrequest,password not valid..)
     private void authenticate(String username, String password) throws Exception {
         try{
