@@ -1,0 +1,4 @@
+titre;description;activated;message
+batch5;desc batch5;TRUE;messagebatch5
+batch6;desc batch6;FALSE;messagebatch6
+batch7;desc batch7;TRUE;messagebatch7

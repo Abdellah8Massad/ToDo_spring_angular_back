@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST,"/register").permitAll()
                 .antMatchers(HttpMethod.POST,"/soapWS").permitAll()
                 .antMatchers(HttpMethod.POST,"/api/authenticate").permitAll()
+                .antMatchers(HttpMethod.GET,"/startJob").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
